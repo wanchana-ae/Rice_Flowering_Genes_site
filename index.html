@@ -23,7 +23,7 @@ h2{font-size:23px;margin:48px 0 6px;letter-spacing:-.01em}h3{font-size:16px;marg
 .tw{overflow-x:auto;border:1px solid var(--border);border-radius:12px;background:var(--surface)}
 table{border-collapse:collapse;width:100%;font-size:13px}th,td{padding:7px 10px;text-align:left;border-bottom:1px solid var(--border);white-space:nowrap}
 th{background:var(--surface-2);position:sticky;top:0;font-weight:650;font-size:12px}td.num{text-align:right;font-variant-numeric:tabular-nums}.muted{color:var(--text-muted);white-space:normal}
-tr:last-child td{border-bottom:0}.imp.HIGH{color:#b3261e;font-weight:650}.imp.MODERATE{color:#a05a00;font-weight:650}
+tr:last-child td{border-bottom:0}tr.tot td{background:var(--surface-2)}.imp.HIGH{color:#b3261e;font-weight:650}.imp.MODERATE{color:#a05a00;font-weight:650}
 select{padding:8px 10px;border:1px solid var(--border);border-radius:8px;background:var(--surface);color:var(--text);font:inherit;max-width:100%}
 img.fig{max-width:100%;height:auto;border:1px solid var(--border);border-radius:10px;background:#fff}
 .btn{display:inline-block;background:var(--accent);color:#fff;text-decoration:none;padding:9px 16px;border-radius:9px;font-weight:600;font-size:14px;margin:4px 8px 4px 0}
@@ -392,6 +392,22 @@ footer{border-top:1px solid var(--border);text-align:center;color:var(--text-mut
 <h2 id="trees">5 · Gene trees</h2>
 <p class="sub">IQ-TREE (GTR+ASC, 1000 UFBoot + 1000 SH-aLRT) from the SNPs inside each gene, and one combined tree from all genes' SNPs. Tips can be coloured by photosensitivity, flowering date or the gene groups above.</p>
 <p><a class="btn" href="tree-viewer.html">Open the flowering gene tree viewer →</a><a class="btn ghost" href="data/phenotype_cohort.tsv">phenotype_cohort.tsv</a></p>
+<h2 id="counts">6 · Variant counts</h2>
+<p class="sub">How the variant numbers used on this page add up. A variant here is one ALT allele at one position, taken from the raw VCF; "polymorphic" means both the REF and the ALT allele are seen among the 278 accessions of the cohort (variants where every accession matches the Nipponbare reference are not counted).</p>
+<h3 style="font-size:14px">By location and type</h3>
+<div class="tw" style="max-width:640px"><table><thead><tr><th>Group</th><th class="num">All found in the VCF</th><th class="num">Polymorphic in the cohort</th></tr></thead><tbody><tr><td>SNPs in the gene body</td><td class="num">2,121</td><td class="num">1,713</td></tr>
+<tr><td>Indels / MNPs in the gene body</td><td class="num">766</td><td class="num">463</td></tr>
+<tr class="tot"><td><b>Total in the gene bodies</b></td><td class="num"><b>2,887</b></td><td class="num"><b>2,176</b></td></tr>
+<tr><td>SNPs in the ±2 kb flanks (outside the gene)</td><td class="num">2,541</td><td class="num">2,077</td></tr>
+<tr><td>Indels / MNPs in the ±2 kb flanks</td><td class="num">1,022</td><td class="num">663</td></tr>
+</tbody></table></div>
+<p class="sub" style="margin-top:8px">The Excel file "all polymorphic variants" contains the 2,176 polymorphic variants of the gene bodies. The 658 SNPs in the violin plots are the subset of polymorphic SNPs with MAF ≥ 0.05 and call rate ≥ 0.8.</p>
+<h3 style="font-size:14px">snpEff impact of the polymorphic variants in the gene bodies</h3>
+<div class="tw" style="max-width:640px"><table><thead><tr><th>Type</th><th class="num">HIGH</th><th class="num">MODERATE</th><th class="num">LOW</th><th class="num">MODIFIER</th><th class="num">Total</th></tr></thead><tbody><tr><td>SNP</td><td class="num">5</td><td class="num">128</td><td class="num">161</td><td class="num">1,419</td><td class="num">1,713</td></tr>
+<tr><td>Indel / MNP</td><td class="num">11</td><td class="num">16</td><td class="num">4</td><td class="num">432</td><td class="num">463</td></tr>
+<tr class="tot"><td><b>Total</b></td><td class="num"><b>16</b></td><td class="num"><b>144</b></td><td class="num"><b>165</b></td><td class="num"><b>1,851</b></td><td class="num"><b>2,176</b></td></tr>
+</tbody></table></div>
+<p class="sub" style="margin-top:8px">Impact is the most severe over all transcripts, so each variant is counted once: HIGH + MODERATE = 160 variants. The table in section 2 has more rows (173) because a variant with several effects (for example missense plus a splice-region effect) appears once per distinct effect. Impact classes are snpEff predictions (Ensembl release 46 database), not measured protein effects.</p>
 </main>
 <footer>Rice flowering genes · Wanchana · generated 2026-10-07</footer>
 <script>
